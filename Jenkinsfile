@@ -43,7 +43,7 @@ pipeline {
            steps {
 	           script {
 		            withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
-                        sh "mvn sonar:sonar"
+                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=ci-register-app"
 		            }
 	           }	
            }
