@@ -38,7 +38,11 @@ pipeline {
                  sh "mvn test"
            }
        }
-
+        stage('SonarQube analysis') {
+                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { // You can override the credential to be used
+                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+                }
+            } 
     //    stage("SonarQube Analysis"){
     //        steps {
 	//            script {
@@ -112,15 +116,6 @@ pipeline {
 //                      subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful", 
 //                      mimeType: 'text/html',to: "ashfaque.s510@gmail.com"
 //       }  
-        node {
-            stage('SCM') {
-                git 'https://github.com/foo/bar.git'
-            }
-            stage('SonarQube analysis') {
-                withSonarQubeEnv(credentialsId: 'f225455e-ea59-40fa-8af7-08176e86507a', installationName: 'My SonarQube Server') { // You can override the credential to be used
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-                }
-            }
-        }   
+            
    }
 }
