@@ -1,8 +1,8 @@
 pipeline {
     agent { label 'Jenkins-Agent' }
     tools {
-        jdk 'Java17'
-        maven 'Maven3'
+        jdk 'Java 17'
+        maven 'Maven 3.9.6'
     }
     // environment {
 	//     APP_NAME = "register-app-pipeline"
@@ -42,9 +42,9 @@ pipeline {
        stage("SonarQube Analysis"){
            steps {
 	           script {
-		        withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
+		            withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
                         sh "mvn sonar:sonar"
-		        }
+		            }
 	           }	
            }
        }
@@ -111,5 +111,5 @@ pipeline {
 //                      subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful", 
 //                      mimeType: 'text/html',to: "ashfaque.s510@gmail.com"
 //       }      
-//    }
+   }
 }
