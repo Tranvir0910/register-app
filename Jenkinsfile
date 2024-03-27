@@ -2,7 +2,7 @@ pipeline {
     agent { label 'Jenkins-Agent' }
     tools {
         jdk 'Java 17'
-        maven 'Maven 3.9.6'
+        maven 'Maven 3.9.4'
     }
     // environment {
 	//     APP_NAME = "register-app-pipeline"
