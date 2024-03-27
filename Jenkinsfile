@@ -31,30 +31,23 @@ pipeline {
                 sh "mvn clean package"
             }
 
-       }
+        }
 
-       stage("Test Application"){
-           steps {
-                 sh "mvn test"
-           }
-       }
-        stage('SonarQube analysis') {
+        stage("Test Application"){
             steps {
-                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { // You can override the credential to be used
-                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
-                }
+                    sh "mvn test"
             }
-            } 
-    //    stage("SonarQube Analysis"){
-    //        steps {
-	//            script {
-	// 	            withSonarQubeEnv('My SonarQube Server', envOnly: true) {
-    //                 // This expands the evironment variables SONAR_CONFIG_NAME, SONAR_HOST_URL, SONAR_AUTH_TOKEN that can be used by any script.
-    //                 println ${env.SONAR_HOST_URL} 
-    //                 }
-	//            }	
-    //        }
-    //    }
+        }
+
+        stage("SonarQube Analysis"){
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') { 
+                        sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
+                    }
+                }	
+            }
+        }
 
 //        stage("Quality Gate"){
 //            steps {
