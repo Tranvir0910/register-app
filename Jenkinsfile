@@ -8,7 +8,7 @@ pipeline {
 	    APP_NAME = "register-app-pipeline"
         RELEASE = "1.0.0"
         DOCKER_USER = "tranvix0910"
-        DOCKER_PASS = 'dockerhub'   // credentials: dockerhub
+        DOCKER_PASS = 'dockerhub-token'   // credentials: dockerhub-token
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
 	    // JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
@@ -63,7 +63,6 @@ pipeline {
                     docker.withRegistry('',DOCKER_PASS) {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
-
                     docker.withRegistry('',DOCKER_PASS) {
                         docker_image.push("${IMAGE_TAG}")
                         docker_image.push('latest')
