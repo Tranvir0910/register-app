@@ -109,5 +109,4 @@ pipeline {
 //                      mimeType: 'text/html',to: "ashfaque.s510@gmail.com"
 //       }  
             
-   }
 }
